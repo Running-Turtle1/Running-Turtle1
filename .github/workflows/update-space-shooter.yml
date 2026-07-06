@@ -1,0 +1,26 @@
+name: Update GitHub Space Shooter
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-space-shooter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - uses: czl9707/gh-space-shooter@v2
+        with:
+          github-token: ${{ secrets.GH_SPACE_SHOOTER_TOKEN || secrets.GITHUB_TOKEN }}
+          username: Running-Turtle1
+          output-path: gh-space-shooter.gif
+          strategy: random
+          fps: 25
+          commit-message: Update GitHub space shooter
